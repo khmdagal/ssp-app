@@ -30,7 +30,7 @@ function GetWords({ userInfo }) {
       setUserLastName(userInfo.lastname);
       setUserId(userInfo.id);
     }
-  }, []);
+  }, [userInfo]);
 
   const userFullname = `${userFirstName} ${userLastName}`;
   const arrayOfSelectedWords = [...clickedWords]; //.join(", ");
