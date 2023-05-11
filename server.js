@@ -1,4 +1,5 @@
 require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -50,7 +51,7 @@ app.use("/login", async (req, res) => {
 
   try {
     const user = await pool.query(
-      `SELECT firstname, lastname, password FROM accounts WHERE username = $1`,
+      `SELECT user_id, firstname, lastname, password FROM accounts WHERE username = $1`,
       [username]
     );
 
@@ -65,20 +66,30 @@ app.use("/login", async (req, res) => {
       res.status(401).json({ error: "Invalid username or password" });
       return;
     } else {
+      const token = jwt.sign(
+        {
+          id: user.rows[0].user_id,
+          firstname: user.rows[0].firstname,
+          lastname: user.rows[0].lastname,
+        },
+        process.env["jwtPrivateKey"] // env is objec [xxx] you are accessing the key of the object
+      );
+      console.log("===>", token, passwordMatch);
       res.status(200).json({
         // JWT
-        firstname: user.rows[0].firstname,
-        lastname: user.rows[0].lastname,
+        token,
+        user: {
+          id: user.rows[0].user_id,
+          firstname: user.rows[0].firstname,
+          lastname: user.rows[0].lastname,
+        },
       });
     }
-
   } catch (err) {
     console.error(err);
     res.status(500).send(err);
   }
 });
-
-
 
 app.get("/words", async (req, res) => {
   try {
@@ -89,7 +100,6 @@ app.get("/words", async (req, res) => {
     res.status(500).send(err);
   }
 });
-
 
 app.listen(PORT, () =>
   console.log("API is running on http://localhost:8080/login")

@@ -1,12 +1,16 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import PracticePage from "./PracticePage";
+import { FaUserAlt } from "react-icons/fa";
 //import { getSelectedWords } from "../middlewares/Functions";
 import "./getwords.css";
 
-function GetWords() {
+function GetWords({ userInfo }) {
   const [data, setData] = useState([]);
   const [clickedWords, setClickedWords] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+  const [userId, setUserId] = useState("");
   async function fetchWords() {
     try {
       const response = await fetch("http://localhost:8080/words");
@@ -17,15 +21,33 @@ function GetWords() {
     }
   }
 
+  if (!!userInfo) console.log(userInfo);
+
   useEffect(() => {
     fetchWords();
+    if (!!userInfo) {
+      setUserFirstName(userInfo.firstname);
+      setUserLastName(userInfo.lastname);
+      setUserId(userInfo.id);
+    }
   }, []);
 
+  const userFullname = `${userFirstName} ${userLastName}`;
   const arrayOfSelectedWords = [...clickedWords]; //.join(", ");
 
   return (
     <>
-      <h1>Practice App</h1>
+      <p>
+        <FaUserAlt /> {userFullname}
+      </p>
+      <p>
+        Choose the range of words you would like practice and then click the{" "}
+        <strong>
+          <span>Get New Word</span>
+        </strong>{" "}
+        button. After that keep pressing Enter key when you want to submit and
+        get new word to practice
+      </p>
       <div className="words-container">
         {data.length === 0 ? (
           <p>Loading...</p>

@@ -1,42 +1,41 @@
 import React, { useState } from "react";
 
 import "./App.css";
-//import { BrowserRouter, Route, Routes} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Dashboard from "../src/components/Dashboard/Dashboard";
 import Login from "./components/Login/LoginForm";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  const [token, setToken] = useState("");
+  //
+  const [userInfo, setUserInfo] = useState("");
 
-  const sendDataToParent = (data) => {
-    setToken(data);
+  const getUserInfoFromLogin = (data) => {
+    setUserInfo(data);
   };
 
+  console.log("--->>>", userInfo.id);
   return (
     <div>
-      <h1 className="App-header">Authentication test {token}</h1>
+      <BrowserRouter>
+        <h1 className="App-header">Statutory Spelling Practice</h1>
 
-       {token ? (
-        <Dashboard token={token} />
-      ) : (
-        <Login sendDataToParent={sendDataToParent} />
-      )}  
-
-
-
-
-   {/* <BrowserRouter>
         <Routes>
-          {token ? (
-            <Route path="/dashboard" element={<Dashboard token={token} />} />
-          ) : (
-            <Route
-              path="/"
-              element={<Login sendDataToParent={sendDataToParent} />}
-            />
-          )}
+          <Route
+            path="/"
+            element={<Login getUserInfoFromLogin={getUserInfoFromLogin} />}
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                {" "}
+                <Dashboard userInfo={userInfo} />{" "}
+              </ProtectedRoute>
+            }
+          />
         </Routes>
-      </BrowserRouter>  */}
+      </BrowserRouter>
     </div>
   );
 }

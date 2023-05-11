@@ -122,7 +122,8 @@ export default function PracticePage({ arrayOfSelectedWords, data }) {
 
       <div>
         <label htmlFor="question">
-          Question <input id="question" type="text" value={theWord} disabled />
+          Question{" "}
+          <input id="question" type="text" value={theWord} disabled hidden />
         </label>
 
         <label htmlFor="answer">
@@ -140,9 +141,9 @@ export default function PracticePage({ arrayOfSelectedWords, data }) {
         </label>
       </div>
 
-      <p>Correct Ansers{correctAnswers.join(",")}</p>
-      <p>Wrong Ansers{wrongAnswers.join(",")}</p>
-      <button onClick={checkTheAnswer}>Say The Word</button>
+      <p>Correct Ansers {correctAnswers.join(",")}</p>
+      <p>Wrong Ansers {wrongAnswers.join(",")}</p>
+      {/* <button onClick={checkTheAnswer}>Say The Word</button> */}
       <button
         ref={getNewWordButton}
         name="getNewWordbutton"

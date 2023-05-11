@@ -16,8 +16,9 @@ const createUser = async (firstname, lastname, username, password, email) => {
 
   const user = await pool.query(
     `insert into accounts (firstname, lastname,username,password,email) values ($1,$2,$3,$4,$5)`,
-    [firstname,lastname,username,hashedPassword,email]
+    [firstname, lastname, username, hashedPassword, email]
   );
 };
 
-createUser('Adam', 'K', 'adam', 'Kdagaal123', 'adam@gmail.com');
+createUser("guest", "1", "guest", "Abc123", "guest@gmail.com");
+createUser("Khadar", "Dagal", "Khadar", "Abc123", "guest@gmail.com");

@@ -1,11 +1,13 @@
-
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import "./Login.css";
 
-export default function Login({ sendDataToParent }) {
+export default function Login({ getUserInfoFromLogin }) {
+  const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
+  //const [token, setToken] = useState("");
 
   async function loginUser(credentials) {
     const response = await fetch("http://localhost:8080/login", {
@@ -18,8 +20,15 @@ export default function Login({ sendDataToParent }) {
 
     if (response.ok) {
       const data = await response.json();
-      setToken(data.firstname);
-      sendDataToParent(data.firstname); // Pass the token data back to the App component
+
+      localStorage.setItem("token", data.token);
+
+      // to navigate the
+      navigate("/dashboard");
+      console.log(localStorage.getItem("token"));
+
+      //setToken(data);
+      getUserInfoFromLogin(data.user); // Pass the token data back to the App component
     } else {
       // Handle login error
     }
@@ -32,8 +41,6 @@ export default function Login({ sendDataToParent }) {
       password,
     });
   };
-
-if (!!token) console.log(token);
 
   return (
     <div className="login-wrapper">
@@ -63,8 +70,6 @@ if (!!token) console.log(token);
     </div>
   );
 }
-
-
 
 /*
 import React, { useState } from "react";
