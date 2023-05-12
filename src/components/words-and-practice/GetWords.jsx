@@ -13,7 +13,9 @@ function GetWords({ userInfo }) {
   const [userId, setUserId] = useState("");
   async function fetchWords() {
     try {
-      const response = await fetch("http://localhost:8080/words");
+      const response = await fetch(
+        "https://statutory-spelling-server.glitch.me/words"
+      );
       const words = await response.json();
       setData(words);
     } catch (err) {
