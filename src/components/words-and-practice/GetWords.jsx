@@ -10,7 +10,7 @@ function GetWords({ userInfo }) {
   const [clickedWords, setClickedWords] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
-  const [userId, setUserId] = useState("");
+  //const [userId, setUserId] = useState("");
   async function fetchWords() {
     try {
       const response = await fetch(
@@ -30,7 +30,7 @@ function GetWords({ userInfo }) {
     if (!!userInfo) {
       setUserFirstName(userInfo.firstname);
       setUserLastName(userInfo.lastname);
-      setUserId(userInfo.id);
+      //setUserId(userInfo.id);
     }
   }, [userInfo]);
 
