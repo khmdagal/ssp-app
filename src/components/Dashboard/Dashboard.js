@@ -1,12 +1,17 @@
 import React from "react";
-//import PracticePage from "../words-and-practice/PracticePage";
+import jwt from "jwt-decode";
 import Words from "../words-and-practice/GetWords";
+import Logout from "../Login/Logout";
 
-export default function Dashboard({ userInfo }) {
+export default function Dashboard() {
+  const token = localStorage.getItem("token") 
+const user = jwt(token);
+
   return (
     <div>
+      <Logout />
       <h2>Dashboard</h2>
-      <Words userInfo={userInfo} />
+      <Words user={user} />
     </div>
   );
 }
