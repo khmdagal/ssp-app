@@ -2,10 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import PracticePage from "./PracticePage";
 import { FaUserAlt } from "react-icons/fa";
-//import { getSelectedWords } from "../middlewares/Functions";
 import "./getwords.css";
 
-function GetWords({ userInfo }) {
+function GetWords({ user }) {
   const [data, setData] = useState([]);
   const [clickedWords, setClickedWords] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
@@ -21,16 +20,15 @@ function GetWords({ userInfo }) {
     }
   }
 
-  if (!!userInfo) console.log(userInfo);
-
+ 
   useEffect(() => {
     fetchWords();
-    if (!!userInfo) {
-      setUserFirstName(userInfo.firstname);
-      setUserLastName(userInfo.lastname);
+    if (!!user) {
+      setUserFirstName(user.firstname);
+      setUserLastName(user.lastname);
       //setUserId(userInfo.id);
     }
-  }, [userInfo]);
+  }, [user]);
 
   const userFullname = `${userFirstName} ${userLastName}`;
   const arrayOfSelectedWords = [...clickedWords]; //.join(", ");
