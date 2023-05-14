@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+//import React, { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -7,14 +8,7 @@ import Login from "./components/Login/LoginForm";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
-  //
-  const [userInfo, setUserInfo] = useState("");
 
-  const getUserInfoFromLogin = (data) => {
-    setUserInfo(data);
-  };
-
-  console.log("--->>>", userInfo.id);
   return (
     <div>
       <BrowserRouter>
@@ -23,14 +17,13 @@ function App() {
         <Routes>
           <Route
             path="/"
-            element={<Login getUserInfoFromLogin={getUserInfoFromLogin} />}
+            element={<Login />}
           />
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-                {" "}
-                <Dashboard userInfo={userInfo} />{" "}
+                <Dashboard />
               </ProtectedRoute>
             }
           />
