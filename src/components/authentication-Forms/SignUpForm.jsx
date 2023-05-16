@@ -21,11 +21,7 @@ function SignUpForm() {
     });
 
     if (response.ok) {
-      const data = await response.json();
-
-      //localStorage.setItem("token", data.token);
-
-      // to navigate the
+      
       navigate("/login");
     } else {
       console.log("response status is not okay! investigate");
