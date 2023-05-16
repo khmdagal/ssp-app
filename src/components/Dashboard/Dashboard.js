@@ -1,11 +1,11 @@
 import React from "react";
 import jwt from "jwt-decode";
 import Words from "../words-and-practice/GetWords";
-import Logout from "../Login/Logout";
+import Logout from "../authentication-Forms/Logout";
 
 export default function Dashboard() {
-  const token = localStorage.getItem("token") 
-const user = jwt(token);
+  const token = localStorage.getItem("token");
+  const user = jwt(token);
 
   return (
     <div>

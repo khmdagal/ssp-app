@@ -9,10 +9,10 @@ function ProtectedRoute({ children }) {
     // Redirect to login page
     return <Navigate to="/" replace />;
   }
-
+  if (!!token) {
+    return <div>{children}</div>;
+  }
   // Render the dashboard if the token exists
-  return <div>{children}</div>;
 }
 
 export default ProtectedRoute;
-
