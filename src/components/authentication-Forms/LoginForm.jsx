@@ -52,6 +52,7 @@ export default function Login() {
               type="text"
               onChange={(e) => setUserName(e.target.value)}
               placeholder="username"
+              data-cy="userNameInputField"
             />
           </Form.Group>
 
@@ -62,11 +63,14 @@ export default function Login() {
               type="password"
               onChange={(e) => setPassword(e.target.value)}
               placeholder="password"
+              data-cy="passwordInputField"
             />
           </Form.Group>
 
           <div>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" data-cy="submitButton">
+              Submit
+            </Button>
           </div>
         </Form>
       </div>
