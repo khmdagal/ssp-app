@@ -10,7 +10,7 @@ describe("login form", () => {
 
     cy.location("pathname").should("eq", "/dashboard");
 
-    //cy.wait(10000);
+
     cy.get(":nth-child(1) > .word-container > label").should("contain.text", "accident");
   });
 
