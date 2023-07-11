@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./SiginAndUp.css";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-//import SignUpForm from "./SignUpForm";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -11,7 +10,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   async function loginUser(credentials) {
-    const response = await fetch("https://spelling-server.glitch.me/login", {
+    const response = await fetch("http://localhost:8080/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
