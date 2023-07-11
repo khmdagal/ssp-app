@@ -12,7 +12,7 @@ function SignUpForm() {
   const [email, setEmail] = useState("");
 
   async function loginUser(credentials) {
-    const response = await fetch("https://spelling-server.glitch.me/signup", {
+    const response = await fetch("http://localhost:8080/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,7 +56,7 @@ function SignUpForm() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>First Name</Form.Label>
+          <Form.Label>Last Name</Form.Label>
           <Form.Control
             value={lastname}
             type="text"
