@@ -9,10 +9,10 @@ function GetWords({ user }) {
   const [clickedWords, setClickedWords] = useState("");
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
-  //const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState("");
   async function fetchWords() {
     try {
-      const response = await fetch("https://spelling-server.glitch.me/words");
+      const response = await fetch("http://localhost:8080/words");
       const words = await response.json();
       setData(words);
     } catch (err) {
@@ -26,7 +26,7 @@ function GetWords({ user }) {
     if (!!user) {
       setUserFirstName(user.firstname);
       setUserLastName(user.lastname);
-      //setUserId(userInfo.id);
+      setUserId(user.id);
     }
   }, [user]);
 
@@ -77,7 +77,7 @@ function GetWords({ user }) {
           ))
         )}
       </div>
-      <PracticePage arrayOfSelectedWords={arrayOfSelectedWords} data={data} />
+      <PracticePage arrayOfSelectedWords={arrayOfSelectedWords} data={data} userId={userId} />
     </>
   );
 }
