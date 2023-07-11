@@ -1,13 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef } from "react";
 
-export default function PracticePage({ arrayOfSelectedWords, data }) {
+export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [theWord, setTheWord] = useState("");
   const [answer, setAnswer] = useState("");
-  const [correctAnswers, setCorrectAnswers] = useState([]);
-  const [wrongAnswers, setWrongAnswers] = useState([]);
+  const [correntWordsList, setCorrentWordsList] = useState([]);
+  const [wrongWordsList, setWrongWordsList] = useState([]);
+  // const [sessionAccuracy, setSessionAccuracy] = useState(0)
 
   const getNewWordButton = useRef(null);
   const answerInputField = useRef(null);
@@ -56,6 +57,47 @@ export default function PracticePage({ arrayOfSelectedWords, data }) {
   //     array.splice(index, 1);
   //   }
   // }
+
+  async function sessionRecord(sessionData) {
+    const response = await fetch("http://localhost:8080/session-Record", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(sessionData),
+    });
+
+    console.log(response);
+
+    if (response.ok) {
+      alert("session Data is recorded");
+    } else {
+      alert("something is wrong have a look");
+      console.log("data not recorded");
+    }
+  }
+
+  // this is to make the joined words as one variable name, means not using join(",") method in the submitsession fucntions
+  const correctSpeltWords = correntWordsList.join(",");
+  const wrongSpeltWords = wrongWordsList.join(",");
+  const countedCorrectWord = correntWordsList.length;
+  const countedWrongWord = wrongWordsList.length;
+  const sessionAccuracy = countedCorrectWord - countedWrongWord;
+ 
+  console.log(theWord);
+
+  const submitSessionRecordHandle = async (e) => {
+    e.preventDefault();
+    await sessionRecord({
+      userId,
+      correctSpeltWords,
+      wrongSpeltWords,
+      countedCorrectWord,
+      countedWrongWord,
+      sessionAccuracy,
+    });
+  };
+
   function removeTheWord(word, array) {
     const index = array.indexOf(word);
     if (index > -1) {
@@ -66,7 +108,7 @@ export default function PracticePage({ arrayOfSelectedWords, data }) {
   function checkTheAnswer() {
     if (theWord.trim() !== "" && answer.trim() !== "") {
       if (theWord.trim().toLowerCase() === answer.trim().toLowerCase()) {
-        setCorrectAnswers([...correctAnswers, answer]);
+        setCorrentWordsList([...correntWordsList, answer]);
         spell.text = "Correct";
         speechSynthesis.speak(spell);
         setAnswer("");
@@ -74,7 +116,7 @@ export default function PracticePage({ arrayOfSelectedWords, data }) {
       }
 
       if (theWord.trim().toLowerCase() !== answer.trim().toLowerCase()) {
-        setWrongAnswers([...wrongAnswers, answer]);
+        setWrongWordsList([...wrongWordsList, answer]);
         spell.text = "Not yet";
         speechSynthesis.speak(spell);
         setAnswer("");
@@ -83,7 +125,7 @@ export default function PracticePage({ arrayOfSelectedWords, data }) {
     }
 
     if (answer.trim().toLowerCase() === "") {
-      setWrongAnswers([...wrongAnswers, answer]);
+      setWrongWordsList([...wrongWordsList, answer]);
       spell.text = "...you wront nothing!";
       speechSynthesis.speak(spell);
       setAnswer("");
@@ -96,7 +138,6 @@ export default function PracticePage({ arrayOfSelectedWords, data }) {
       checkTheAnswer();
     }
   }
-  //console.log(correctAnswers.join(","));
 
   return (
     <div>
@@ -141,9 +182,11 @@ export default function PracticePage({ arrayOfSelectedWords, data }) {
         </label>
       </div>
 
-      <p>Correct Ansers {correctAnswers.join(",")}</p>
-      <p>Wrong Ansers {wrongAnswers.join(",")}</p>
-      {/* <button onClick={checkTheAnswer}>Say The Word</button> */}
+      <p>Correct Ansers {correntWordsList.join(",")}</p>
+
+      <p>Wrong Ansers {wrongWordsList.join(",")}</p>
+
+      <button onClick={submitSessionRecordHandle}>Save Session Record</button>
       <button
         ref={getNewWordButton}
         name="getNewWordbutton"
