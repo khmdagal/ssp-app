@@ -3,3 +3,25 @@
   flex-direction: column;
   align-items: center;
 }
+
+body {
+  /* background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e); */
+  background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
+    no-repeat center/ cover;
+}
+/* ================== Mobile view ========================== */
+/* ---- signIn form ---- */
+
+.signIn-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0px 30px 0px;
+  width: 350px;
+  height: 370px;
+  padding: 2px 20px 2px 20px;
+  background: #eee;
+  border-radius: 20px;
+  box-shadow: 5px 20px 50px #000;
+}

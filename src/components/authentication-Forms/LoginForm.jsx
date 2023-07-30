@@ -41,9 +41,9 @@ export default function Login() {
   return (
     <>
       <div className="login-wrapper">
-        <h1>Please Log In Form</h1>
+        <Form className="signIn-form" onSubmit={handleSubmit}>
+          <h1>Please Log In Form</h1>
 
-        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -68,7 +68,7 @@ export default function Login() {
 
           <div>
             <Button type="submit" data-cy="submitButton">
-              Submit
+              Sign in
             </Button>
           </div>
         </Form>
