@@ -21,7 +21,6 @@ function SignUpForm() {
     });
 
     if (response.ok) {
-      
       navigate("/login");
     } else {
       console.log("response status is not okay! investigate");
@@ -43,8 +42,9 @@ function SignUpForm() {
 
   return (
     <div className="login-wrapper">
-      <h1>User Registration Form</h1>
-      <Form onSubmit={handleSubmit}>
+      <Form className="signUp-form" onSubmit={handleSubmit}>
+        <h1>User Registration Form</h1>
+
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>First Name</Form.Label>
           <Form.Control
@@ -94,7 +94,7 @@ function SignUpForm() {
           />
         </Form.Group>
 
-        <Button type="submit">Registrer</Button>
+        <Button type="submit">Sign up</Button>
       </Form>
     </div>
   );

@@ -25,3 +25,16 @@ body {
   border-radius: 20px;
   box-shadow: 5px 20px 50px #000;
 }
+
+/* ---- SignUp form ----- */
+
+.signUp-form {
+  width: 350px;
+  height: 530px;
+  padding: 2px 20px 0px 20px;
+  margin: 10px 0px 10px 0px;
+  border-radius: 20px;
+  background: #eee;
+  /* background: linear-gradient(180deg, #c7c5f4, #0d044f); */
+  box-shadow: 5px 20px 50px #000;
+}
