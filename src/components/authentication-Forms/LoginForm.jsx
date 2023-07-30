@@ -45,8 +45,9 @@ export default function Login() {
           <h1>Please Log In Form</h1>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Username</Form.Label>
+            <Form.Label className="labels">Username</Form.Label>
             <Form.Control
+              className="inputFields"
               value={username}
               type="text"
               onChange={(e) => setUserName(e.target.value)}
@@ -56,8 +57,9 @@ export default function Login() {
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Password</Form.Label>
+            <Form.Label className="labels">Password</Form.Label>
             <Form.Control
+              className="inputFields"
               value={password}
               type="password"
               onChange={(e) => setPassword(e.target.value)}

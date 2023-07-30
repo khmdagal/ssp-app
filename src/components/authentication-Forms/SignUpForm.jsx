@@ -46,8 +46,9 @@ function SignUpForm() {
         <h1>User Registration Form</h1>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>First Name</Form.Label>
+          <Form.Label className="labels">First Name</Form.Label>
           <Form.Control
+            className="inputFields"
             value={firstname}
             type="text"
             onChange={(e) => setFirstName(e.target.value)}
@@ -56,8 +57,9 @@ function SignUpForm() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Last Name</Form.Label>
+          <Form.Label className="labels">Last Name</Form.Label>
           <Form.Control
+            className="inputFields"
             value={lastname}
             type="text"
             onChange={(e) => setLastName(e.target.value)}
@@ -65,8 +67,9 @@ function SignUpForm() {
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Username</Form.Label>
+          <Form.Label className="labels">Username</Form.Label>
           <Form.Control
+            className="inputFields"
             value={username}
             type="text"
             onChange={(e) => setUserName(e.target.value)}
@@ -75,8 +78,9 @@ function SignUpForm() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className="labels">Password</Form.Label>
           <Form.Control
+            className="inputFields"
             value={password}
             type="password"
             onChange={(e) => setPassword(e.target.value)}
@@ -85,8 +89,9 @@ function SignUpForm() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
+          <Form.Label className="labels">Email</Form.Label>
           <Form.Control
+            className="inputFields"
             value={email}
             type="email"
             onChange={(e) => setEmail(e.target.value)}
