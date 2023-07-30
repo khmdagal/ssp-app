@@ -19,7 +19,7 @@ function SignInSignUpForms() {
       {theForm}
       <div className="d-grid gap-2 col-6 mx-auto">
         <Button
-          className="btn btn-primary"
+          className="btn btn-signIn btn-primary"
           onClick={() => {
             setSigninForm(true);
             setSignUpForm(false);
@@ -29,7 +29,7 @@ function SignInSignUpForms() {
           Sign In
         </Button>
         <button
-          className="btn btn-success"
+          className="btn btn-signUp btn-success"
           onClick={() => {
             setSigninForm(false);
             setSignUpForm(true);
