@@ -99,7 +99,9 @@ function SignUpForm() {
           />
         </Form.Group>
 
-        <Button type="submit">Sign up</Button>
+        <Button className="btn-signUp" type="submit">
+          Sign up
+        </Button>
       </Form>
     </div>
   );

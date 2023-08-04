@@ -69,7 +69,7 @@ export default function Login() {
           </Form.Group>
 
           <div>
-            <Button type="submit" data-cy="submitButton">
+            <Button className="btn-signIn" type="submit" data-cy="submitButton">
               Sign in
             </Button>
           </div>
