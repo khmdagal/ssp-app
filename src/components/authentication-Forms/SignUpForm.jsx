@@ -43,7 +43,7 @@ function SignUpForm() {
   return (
     <div className="login-wrapper">
       <Form className="signUp-form" onSubmit={handleSubmit}>
-        <h1>User Registration Form</h1>
+        <h1>Registration Form</h1>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="labels">First Name</Form.Label>

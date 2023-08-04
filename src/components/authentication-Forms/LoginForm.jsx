@@ -42,7 +42,7 @@ export default function Login() {
     <>
       <div className="login-wrapper">
         <Form className="signIn-form" onSubmit={handleSubmit}>
-          <h1>Please Log In Form</h1>
+          <h1>Log In Form</h1>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label className="labels">Username</Form.Label>
