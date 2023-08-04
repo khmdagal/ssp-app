@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SignUpForm from "./SignUpForm";
 import LoginForm from "./LoginForm";
 import Button from "react-bootstrap/Button";
+import "./SiginAndUp.css";
 
 function SignInSignUpForms() {
   const [signInForm, setSigninForm] = useState(true);
@@ -26,7 +27,7 @@ function SignInSignUpForms() {
             console.log(signInForm);
           }}
         >
-          Sign In
+          Sign In Form
         </Button>
         <button
           className="btn btn-signUp btn-success"
@@ -36,7 +37,7 @@ function SignInSignUpForms() {
             console.log(signUpForm);
           }}
         >
-          Sign Up
+          Sign Up Form
         </button>
         <p>Not Registered? Sign Up Here</p>
       </div>
