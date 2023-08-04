@@ -6,7 +6,7 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
   const [end, setEnd] = useState("");
   const [theWord, setTheWord] = useState("");
   const [answer, setAnswer] = useState("");
-  const [correntWordsList, setCorrentWordsList] = useState([]);
+  const [correctWordsList, setCorrectWordsList] = useState([]);
   const [wrongWordsList, setWrongWordsList] = useState([]);
   // const [sessionAccuracy, setSessionAccuracy] = useState(0)
 
@@ -25,6 +25,7 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
     const newArr = data.slice(start - 1, end).map((element) => element.word);
     practiceWords = practiceWords.concat(arrayOfSelectedWords, newArr);
     sayRandomWord(practiceWords);
+    setAnswer("");
     return practiceWords;
   }
 
@@ -78,9 +79,9 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
   }
 
   // this is to make the joined words as one variable name, means not using join(",") method in the submitsession fucntions
-  const correctSpeltWords = correntWordsList.join(",");
+  const correctSpeltWords = correctWordsList.join(",");
   const wrongSpeltWords = wrongWordsList.join(",");
-  const countedCorrectWord = correntWordsList.length;
+  const countedCorrectWord = correctWordsList.length;
   const countedWrongWord = wrongWordsList.length;
   const sessionAccuracy = countedCorrectWord - countedWrongWord;
  
@@ -108,25 +109,27 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
   function checkTheAnswer() {
     if (theWord.trim() !== "" && answer.trim() !== "") {
       if (theWord.trim().toLowerCase() === answer.trim().toLowerCase()) {
-        setCorrentWordsList([...correntWordsList, answer]);
+        setCorrectWordsList([...correctWordsList, answer]);
         spell.text = "Correct";
         speechSynthesis.speak(spell);
-        setAnswer("");
+       
         getNewWordButton.current.focus();
+         setAnswer("");
       }
 
       if (theWord.trim().toLowerCase() !== answer.trim().toLowerCase()) {
         setWrongWordsList([...wrongWordsList, answer]);
         spell.text = "Not yet";
         speechSynthesis.speak(spell);
-        setAnswer("");
+        
         getNewWordButton.current.focus();
+        setAnswer("");
       }
     }
 
     if (answer.trim().toLowerCase() === "") {
       setWrongWordsList([...wrongWordsList, answer]);
-      spell.text = "...you wront nothing!";
+      spell.text = "...you wrote nothing!";
       speechSynthesis.speak(spell);
       setAnswer("");
       getNewWordButton.current.focus();
@@ -182,9 +185,9 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
         </label>
       </div>
 
-      <p>Correct Ansers {correntWordsList.join(",")}</p>
+      <p>Correct Answers {correctWordsList.join(",")}</p>
 
-      <p>Wrong Ansers {wrongWordsList.join(",")}</p>
+      <p>Wrong Answers {wrongWordsList.join(",")}</p>
 
       <button onClick={submitSessionRecordHandle}>Save Session Record</button>
       <button
