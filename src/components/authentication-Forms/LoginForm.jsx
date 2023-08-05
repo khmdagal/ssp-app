@@ -32,7 +32,8 @@ export default function Login() {
     } else {
       console.log("response status is not okay! investigate");
       alert("Incorrect Login details")
-      // errorMessage = ;
+      setUserName("")
+      setPassword("")
     }
   }
 
