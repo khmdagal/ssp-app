@@ -8,7 +8,6 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
   const [answer, setAnswer] = useState("");
   const [correctWordsList, setCorrectWordsList] = useState([]);
   const [wrongWordsList, setWrongWordsList] = useState([]);
-  // const [sessionAccuracy, setSessionAccuracy] = useState(0)
 
   const getNewWordButton = useRef(null);
   const answerInputField = useRef(null);
@@ -78,26 +77,27 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
     }
   }
 
-  // this is to make the joined words as one variable name, means not using join(",") method in the submitsession fucntions
-  const correctSpeltWords = correctWordsList.join(",");
-  const wrongSpeltWords = wrongWordsList.join(",");
-  const countedCorrectWord = correctWordsList.length;
-  const countedWrongWord = wrongWordsList.length;
-  const sessionAccuracy = countedCorrectWord - countedWrongWord;
- 
+
+// store session data into one object and then send this object to the backend 
+  const sessionData = {
+    userId,
+    correctSpeltWords: correctWordsList.join(","),
+    wrongSpeltWords: wrongWordsList.join(","),
+    countedCorrectWords: correctWordsList.length,
+    countedWrongWords: wrongWordsList.length,
+    get total() { return this.countedCorrectWords + this.countedWrongWords },
+    get correct() { return this.countedCorrectWords - this.countedWrongWords },
+    get session_accuracy_percentage() { return (this.correct / this.total) * 100 },
+  };
+
+
   console.log(theWord);
 
   const submitSessionRecordHandle = async (e) => {
     e.preventDefault();
-    await sessionRecord({
-      userId,
-      correctSpeltWords,
-      wrongSpeltWords,
-      countedCorrectWord,
-      countedWrongWord,
-      sessionAccuracy,
-    });
+    await sessionRecord(sessionData);
   };
+
 
   function removeTheWord(word, array) {
     const index = array.indexOf(word);
@@ -112,16 +112,16 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
         setCorrectWordsList([...correctWordsList, answer]);
         spell.text = "Correct";
         speechSynthesis.speak(spell);
-       
+
         getNewWordButton.current.focus();
-         setAnswer("");
+        setAnswer("");
       }
 
       if (theWord.trim().toLowerCase() !== answer.trim().toLowerCase()) {
         setWrongWordsList([...wrongWordsList, answer]);
         spell.text = "Not yet";
         speechSynthesis.speak(spell);
-        
+
         getNewWordButton.current.focus();
         setAnswer("");
       }
