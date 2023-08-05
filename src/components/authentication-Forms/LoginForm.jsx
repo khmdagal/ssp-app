@@ -9,6 +9,10 @@ export default function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
 
+//   const showloginErrorMessage = (errorMessage) => {
+//    return errorMessage
+//  }
+
   async function loginUser(credentials) {
     const response = await fetch("http://localhost:8080/login", {
       method: "POST",
@@ -27,6 +31,8 @@ export default function Login() {
       navigate("/dashboard");
     } else {
       console.log("response status is not okay! investigate");
+      alert("Incorrect Login details")
+      // errorMessage = ;
     }
   }
 
@@ -72,6 +78,7 @@ export default function Login() {
             <Button className="btn-signIn" type="submit" data-cy="submitButton">
               Sign in
             </Button>
+            
           </div>
         </Form>
       </div>
