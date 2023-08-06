@@ -5,41 +5,51 @@ export default function UserOverallProgress({ user }) {
   const [lastName, setLastName] = useState("");
   const [userId, setUserId] = useState(user.id);
   const [sessionData, setSessionsData] = useState("");
-
   const [progressData, setProgressData] = useState([]);
 
-  try {
-    // to get the specific user progress data
-    const getUserOverallProgressData = async () => {
-      const progressData = await fetch(
-        `http://localhost:8080/overall_progress_data/${userId}`
-      );
-      const overallProgressData = await progressData.json();
+  useEffect(() => {
+  const getUserOverallProgressData = async () => {
+    try {
+      // Perform asynchronous operations, such as fetching data
+      const response = await fetch(`http://localhost:8080/overall_progress_data/${userId}`);
 
+      if (!response.ok) {
+        throw new Error("Failed to fetch progress data");
+      }
+
+      const overallProgressData = await response.json();
       setProgressData(overallProgressData);
-    };
+    } catch (error) {
+      console.error(error);
+      // Handle the error here if needed
+    }
+  };
 
-    // to get most updated sessions data
-    const updateSessionsRecordData = async () => {
+  const updateSessionsRecordData = async () => {
+    try {
+      // Perform asynchronous operations, such as fetching data
       const getData = await fetch(`http://localhost:8080/sessions_data`);
       const sessionsData = await getData.json();
 
       setSessionsData(sessionsData);
-    };
+    } catch (error) {
+      console.error(error);
+      // Handle the error here if needed
+       console.error(error);
+       setProgressData([]);
+    }
+  };
 
-    useEffect(() => {
-      if (!!user) {
-        setFirstName(user.firstname);
-        setLastName(user.lastname);
-        setUserId(user.id);
-      }
-
-      getUserOverallProgressData();
-      updateSessionsRecordData();
-    }, [user]);
-  } catch (error) {
-    console.error(error);
+  if (!!user) {
+    setFirstName(user.firstname);
+    setLastName(user.lastname);
+    setUserId(user.id);
   }
+
+  getUserOverallProgressData();
+  updateSessionsRecordData();
+}, [user, userId]);
+
 
   if (!progressData) {
     return <p>Loading...</p>;
