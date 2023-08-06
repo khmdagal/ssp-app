@@ -19,7 +19,13 @@ export default function UserOverallProgress({ user }) {
       setProgressData(overallProgressData);
     };
 
-   
+    // to get most updated sessions data
+    const updateSessionsRecordData = async () => {
+      const getData = await fetch(`http://localhost:8080/sessions_data`);
+      const sessionsData = await getData.json();
+
+      setSessionsData(sessionsData);
+    };
 
     useEffect(() => {
       if (!!user) {
@@ -29,7 +35,7 @@ export default function UserOverallProgress({ user }) {
       }
 
       getUserOverallProgressData();
-     
+      updateSessionsRecordData();
     }, [user]);
   } catch (error) {
     console.error(error);
@@ -37,7 +43,9 @@ export default function UserOverallProgress({ user }) {
 
   if (!progressData) {
     return <p>Loading...</p>;
-  } 
+  } else if (progressData.length === 0) {
+    return <p>No progress data available.</p>;
+  }
 
   return (
     <div>
