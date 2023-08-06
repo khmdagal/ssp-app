@@ -41,7 +41,27 @@ export default function UserOverallProgress({ user }) {
 
   return (
     <div>
-      
+      <table>
+        <thead>
+          <tr>
+            <th
+              colSpan={2}
+            >{`${firstName} ${lastName} Sessions Record Progress`}</th>
+          </tr>
+          <tr>
+            <th>Session Number</th>
+            <th>Session Score Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {progressData.map((data) => (
+            <tr key={data.session_id}>
+              <td>{data.session_id}</td>
+              <td>{data.session_accuracy_percentage}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
