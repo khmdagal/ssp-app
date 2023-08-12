@@ -10,6 +10,7 @@ function GetWords({ user }) {
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userId, setUserId] = useState("");
+
   async function fetchWords() {
     try {
       const response = await fetch("http://localhost:8080/words");
@@ -19,15 +20,17 @@ function GetWords({ user }) {
       console.error(err);
     }
   }
-
  
+
   useEffect(() => {
+   
     fetchWords();
     if (!!user) {
       setUserFirstName(user.firstname);
       setUserLastName(user.lastname);
       setUserId(user.id);
     }
+   
   }, [user]);
 
   const userFullname = `${userFirstName} ${userLastName}`;
