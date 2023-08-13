@@ -51,12 +51,6 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
     }
   };
 
-  // Removing the word from the practiceWord array after it is shouted. So that the user only have a change to practice each word once.
-  // function removeTheWord(word, array) {
-  //   if (word === theWord) {
-  //     array.splice(index, 1);
-  //   }
-  // }
 
   async function sessionRecord(sessionData) {
     const response = await fetch("http://localhost:8080/session-Record", {
