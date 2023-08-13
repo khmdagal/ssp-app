@@ -10,6 +10,7 @@ function GetWords({ user }) {
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
   const [userId, setUserId] = useState("");
+  const [displayWord, setDisplayWord] = useState(true);
 
   async function fetchWords() {
     try {
@@ -20,17 +21,17 @@ function GetWords({ user }) {
       console.error(err);
     }
   }
- 
+
 
   useEffect(() => {
-   
+
     fetchWords();
     if (!!user) {
       setUserFirstName(user.firstname);
       setUserLastName(user.lastname);
       setUserId(user.id);
     }
-   
+
   }, [user]);
 
   const userFullname = `${userFirstName} ${userLastName}`;
@@ -49,38 +50,47 @@ function GetWords({ user }) {
         button. After that keep pressing Enter key when you want to submit and
         get new word to practice
       </p>
-      <div className="words-container">
-        {data.length === 0 ? (
-          <p>Loading...</p>
-        ) : (
-          data.map((word) => (
-            <div key={word.word_id}>
-              <span className="word-container">
-                <input
-                  onClick={(e) => {
-                    const checkedWord = e.target.value;
-                    const isChecked = e.target.checked;
-                    setClickedWords((prevSelectedWordsArr) =>
-                      isChecked
-                        ? [...prevSelectedWordsArr, checkedWord]
-                        : prevSelectedWordsArr.filter(
-                            (word) => word !== checkedWord
-                          )
-                    );
-                  }}
-                  id={word.word_id}
-                  type="checkbox"
-                  value={word.word}
-                />
-                <label htmlFor={word.word_id}>
-                  {word.word_id}: {word.word}
-                </label>
-              </span>
-            </div>
-          ))
-        )}
-      </div>
-      <PracticePage arrayOfSelectedWords={arrayOfSelectedWords} data={data} userId={userId} />
+      {displayWord ? (
+        <div className="words-container">
+          {data.length === 0 ? (
+            <p>Loading...</p>
+          ) : (
+            data.map((word) => (
+              <div key={word.word_id}>
+                <span className="word-container">
+                  <input
+                    onClick={(e) => {
+                      const checkedWord = e.target.value;
+                      const isChecked = e.target.checked;
+                      setClickedWords((prevSelectedWordsArr) =>
+                        isChecked
+                          ? [...prevSelectedWordsArr, checkedWord]
+                          : prevSelectedWordsArr.filter(
+                              (word) => word !== checkedWord
+                            )
+                      );
+                    }}
+                    id={word.word_id}
+                    type="checkbox"
+                    value={word.word}
+                  />
+                  <label htmlFor={word.word_id}>
+                    {word.word_id}: {word.word}
+                  </label>
+                </span>
+              </div>
+            ))
+          )}
+        </div>
+      ) : (
+        <p>Good luck for the practice</p>
+      )}
+      <PracticePage
+        setDisplayWord={setDisplayWord}
+        arrayOfSelectedWords={arrayOfSelectedWords}
+        data={data}
+        userId={userId}
+      />
     </>
   );
 }

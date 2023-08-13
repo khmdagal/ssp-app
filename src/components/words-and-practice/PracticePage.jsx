@@ -1,7 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useRef } from "react";
 
-export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
+export default function PracticePage({
+  setDisplayWord,
+  arrayOfSelectedWords,
+  data,
+  userId,
+}) {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [theWord, setTheWord] = useState("");
@@ -51,7 +56,6 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
     }
   };
 
-
   async function sessionRecord(sessionData) {
     const response = await fetch("http://localhost:8080/session-Record", {
       method: "POST",
@@ -71,19 +75,23 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
     }
   }
 
-
-// store session data into one object and then send this object to the backend 
+  // store session data into one object and then send this object to the backend
   const sessionData = {
     userId,
     correctSpeltWords: correctWordsList.join(","),
     wrongSpeltWords: wrongWordsList.join(","),
     countedCorrectWords: correctWordsList.length,
     countedWrongWords: wrongWordsList.length,
-    get total() { return this.countedCorrectWords + this.countedWrongWords },
-    get correct() { return this.countedCorrectWords - this.countedWrongWords },
-    get session_accuracy_percentage() { return (this.correct / this.total) * 100 },
+    get total() {
+      return this.countedCorrectWords + this.countedWrongWords;
+    },
+    get correct() {
+      return this.countedCorrectWords - this.countedWrongWords;
+    },
+    get session_accuracy_percentage() {
+      return (this.correct / this.total) * 100;
+    },
   };
-
 
   console.log(theWord);
 
@@ -91,7 +99,6 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
     e.preventDefault();
     await sessionRecord(sessionData);
   };
-
 
   function removeTheWord(word, array) {
     const index = array.indexOf(word);
@@ -134,6 +141,11 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
     if (e.key === "Enter") {
       checkTheAnswer();
     }
+  }
+
+  function onClickFunction() {
+    getWordsToPractice();
+    setDisplayWord(false);
   }
 
   return (
@@ -188,7 +200,7 @@ export default function PracticePage({ arrayOfSelectedWords, data, userId }) {
         ref={getNewWordButton}
         name="getNewWordbutton"
         id="getNewWordbutton"
-        onClick={getWordsToPractice}
+        onClick={onClickFunction}
       >
         Get New Word
       </button>
