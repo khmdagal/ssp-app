@@ -97,7 +97,16 @@ export default function PracticePage({
 
   const submitSessionRecordHandle = async (e) => {
     e.preventDefault();
+
     await sessionRecord(sessionData);
+
+    setDisplayWord(true);
+    setStart("");
+    setEnd("");
+    setTheWord("");
+    setAnswer("");
+    setCorrectWordsList([]);
+    setWrongWordsList([]);
   };
 
   function removeTheWord(word, array) {
