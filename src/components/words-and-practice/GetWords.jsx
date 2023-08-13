@@ -1,14 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import PracticePage from "./PracticePage";
-import { FaUserAlt } from "react-icons/fa";
+//import { FaUserAlt } from "react-icons/fa";
 import "./getwords.css";
 
 function GetWords({ user }) {
   const [data, setData] = useState([]);
   const [clickedWords, setClickedWords] = useState("");
-  const [userFirstName, setUserFirstName] = useState("");
-  const [userLastName, setUserLastName] = useState("");
   const [userId, setUserId] = useState("");
   const [displayWord, setDisplayWord] = useState(true);
 
@@ -27,21 +25,18 @@ function GetWords({ user }) {
 
     fetchWords();
     if (!!user) {
-      setUserFirstName(user.firstname);
-      setUserLastName(user.lastname);
+     
       setUserId(user.id);
     }
 
   }, [user]);
 
-  const userFullname = `${userFirstName} ${userLastName}`;
+
   const arrayOfSelectedWords = [...clickedWords]; //.join(", ");
 
   return (
     <>
-      <p>
-        <FaUserAlt /> {userFullname}
-      </p>
+    
       <p>
         Choose the range of words you would like practice and then click the{" "}
         <strong>
