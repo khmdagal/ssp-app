@@ -4,7 +4,7 @@ export default function UserOverallProgress({ user }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userId, setUserId] = useState(user.id);
-  const [sessionData, setSessionsData] = useState("");
+  //const [sessionData, setSessionsData] = useState("");
   const [progressData, setProgressData] = useState([]);
 
 const getUserOverallProgressData = async (user_id) => {
