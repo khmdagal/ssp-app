@@ -7,50 +7,37 @@ export default function UserOverallProgress({ user }) {
   const [sessionData, setSessionsData] = useState("");
   const [progressData, setProgressData] = useState([]);
 
+const getUserOverallProgressData = async (user_id) => {
+  try {
+    // Perform asynchronous operations, such as fetching data
+    const response = await fetch(
+      `http://localhost:8080/overall_progress_data/${user_id}`
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch progress data");
+    }
+
+    const overallProgressData = await response.json();
+    setProgressData(overallProgressData);
+  } catch (error) {
+    console.error(error);
+    // Handle the error here if needed
+  }
+};
+
   useEffect(() => {
-    const getUserOverallProgressData = async () => {
-      try {
-        // Perform asynchronous operations, such as fetching data
-        const response = await fetch(
-          `http://localhost:8080/overall_progress_data/${userId}`
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch progress data");
-        }
-
-        const overallProgressData = await response.json();
-        setProgressData(overallProgressData);
-      } catch (error) {
-        console.error(error);
-        // Handle the error here if needed
-      }
-    };
-
-    const updateSessionsRecordData = async () => {
-      try {
-        // Perform asynchronous operations, such as fetching data
-        const getData = await fetch(`http://localhost:8080/sessions_data`);
-        const sessionsData = await getData.json();
-
-        setSessionsData(sessionsData);
-      } catch (error) {
-        console.error(error);
-        //if error happen set the progress dat to an empty array
-        console.error(error);
-        setProgressData([]);
-      }
-    };
-
+    
     if (!!user) {
       setFirstName(user.firstname);
       setLastName(user.lastname);
       setUserId(user.id);
     }
+    getUserOverallProgressData(user.id);
+    
+  }, [user, userId]);// adding here sessionData variable will help the practice record to be updated with out refreshing the page
 
-    getUserOverallProgressData();
-    updateSessionsRecordData();
-  }, [user, userId, sessionData]);// adding here sessionData variable will help the practice record to be updated with out refreshing the page
+
 
 
   if (!progressData) {
