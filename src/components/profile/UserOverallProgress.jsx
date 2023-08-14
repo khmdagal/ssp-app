@@ -1,33 +1,33 @@
 import { useState, useEffect } from "react";
+import Charts from "./Charts";
 
 export default function UserOverallProgress({ user }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [userId, setUserId] = useState(user.id);
-  //const [sessionData, setSessionsData] = useState("");
   const [progressData, setProgressData] = useState([]);
+  const [chartData, setChartData] = useState({});
 
-const getUserOverallProgressData = async (user_id) => {
-  try {
-    // Perform asynchronous operations, such as fetching data
-    const response = await fetch(
-      `http://localhost:8080/overall_progress_data/${user_id}`
-    );
+  const getUserOverallProgressData = async (user_id) => {
+    try {
+      // Perform asynchronous operations, such as fetching data
+      const response = await fetch(
+        `http://localhost:8080/overall_progress_data/${user_id}`
+      );
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch progress data");
+      if (!response.ok) {
+        throw new Error("Failed to fetch progress data");
+      }
+
+      const overallProgressData = await response.json();
+      setProgressData(overallProgressData);
+    } catch (error) {
+      console.error(error);
+      // Handle the error here if needed
     }
-
-    const overallProgressData = await response.json();
-    setProgressData(overallProgressData);
-  } catch (error) {
-    console.error(error);
-    // Handle the error here if needed
-  }
-};
+  };
 
   useEffect(() => {
-    
     if (!!user) {
       setFirstName(user.firstname);
       setLastName(user.lastname);
@@ -35,19 +35,30 @@ const getUserOverallProgressData = async (user_id) => {
     }
     getUserOverallProgressData(user.id);
     
-  }, [user, userId]);// adding here sessionData variable will help the practice record to be updated with out refreshing the page
+  }, [user]); // adding here sessionData variable will help the practice record to be updated with out refreshing the page
 
+ 
+  useEffect(() => {
+    setChartData({
+      labels: progressData.map((data) => data.session_id),
+      datasets: [
+        {
+          label: "Sessions",
+          data: progressData.map((data) => data.session_accuracy_percentage),
+        },
+      ],
+    });
+  }, [progressData])
+  
 
-
-
-  if (!progressData) {
-    return <p>Loading...</p>;
-  } else if (progressData.length === 0) {
-    return <p>No progress data available.</p>;
-  }
+   if (!progressData) {
+     return <p>Loading...</p>;
+   } else if (progressData.length === 0) {
+     return <p>No progress data available.</p>;
+   }
 
   return (
-    <div>
+    <div style={{display:"flex"}}>
       <table>
         <thead>
           <tr>
@@ -69,6 +80,9 @@ const getUserOverallProgressData = async (user_id) => {
           ))}
         </tbody>
       </table>
+      <div style={{width:700}}>
+        <Charts chartData={chartData} />
+      </div>
     </div>
   );
 }
