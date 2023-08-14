@@ -12,5 +12,21 @@ export default function Charts({ chartData }) {
     setChartType(value);
 
   }
-return <div></div>
+
+    let chosenChartType;
+
+      switch (chartType) {
+        case "Bar":
+          chosenChartType = (<Bar data={chartData} />);
+          break;
+        case "Line":
+          chosenChartType = (<Line data={chartData} />);
+          break;
+        case "Pie":
+          chosenChartType = (<Pie data={chartData} />);
+          break;
+          default:
+              chosenChartType = null;
+      }
+   return <div></div>
 }
