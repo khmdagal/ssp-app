@@ -11,20 +11,20 @@ export default function Dashboard() {
   const token = localStorage.getItem("token");
   const user = jwt(token);
 
-const [userFirstName, setUserFirstName] = useState("")
-const [userLastName, setUserLastName] = useState("");
-const [userId, setUserId] = useState("");
+  const [userFirstName, setUserFirstName] = useState("");
+  const [userLastName, setUserLastName] = useState("");
+  const [userId, setUserId] = useState("");
 
- useEffect(() => {
+  useEffect(() => {
 
-   if (!!user) {
-     setUserFirstName(user.firstname);
-     setUserLastName(user.lastname);
-     setUserId(user.id);
-   }
- }, [user]);
+    if (!!user) {
+      setUserFirstName(user.firstname);
+      setUserLastName(user.lastname);
+      setUserId(user.id);
+    }
+  }, [user]);
 
-   const userFullname = `${userFirstName} ${userLastName}`;
+  const userFullname = `${userFirstName} ${userLastName}`;
 
   return (
     <div>

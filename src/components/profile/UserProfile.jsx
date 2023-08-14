@@ -65,9 +65,7 @@ console.log(progressData);
 
   return (
     <div>
-      <p>
-        <FaUserAlt /> {userFullName}
-      </p>
+     
       <div className="TableAndCharDiv">
         <UserOverallProgress
           userFullName={userFullName}
