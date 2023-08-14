@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Charts from "./Charts";
+import Table from "react-bootstrap/Table";
 
 export default function UserOverallProgress({ user }) {
   const [firstName, setFirstName] = useState("");
@@ -59,7 +60,7 @@ export default function UserOverallProgress({ user }) {
 
   return (
     <div style={{display:"flex"}}>
-      <table>
+      <Table striped bordered hover size="ms">
         <thead>
           <tr>
             <th
@@ -79,7 +80,7 @@ export default function UserOverallProgress({ user }) {
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
       <div style={{width:700}}>
         <Charts chartData={chartData} />
       </div>
