@@ -2,9 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import jwt from "jwt-decode";
+import UserProfile from "../profile/UserProfile";
 import Words from "../words-and-practice/GetWords";
 import Logout from "../authentication-Forms/Logout";
-import UserOverallProgress from "../profile/UserOverallProgress";
+
 
 export default function Dashboard() {
   const token = localStorage.getItem("token");
@@ -29,9 +30,12 @@ const [userId, setUserId] = useState("");
     <div>
       <Logout />
       <h2>Dashboard</h2>
-      <p> <FaUserAlt /> {userFullname}</p>
-      <UserOverallProgress user={user} />
-      <Words user={user} />
+      {/* think about react route here */}
+      <p>
+        {" "}
+        <FaUserAlt /> {userFullname}
+      </p>
+      <UserProfile user={user} />
     </div>
   );
 }
