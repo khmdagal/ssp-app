@@ -28,5 +28,25 @@ export default function Charts({ chartData }) {
           default:
               chosenChartType = null;
       }
-   return <div></div>
+   
+    return (
+      <div>
+      
+          <select
+            style={{ width: 150 }}
+            onChange={selectChartType}
+            id="cars"
+            name="cars"
+          >
+            <option defaultValue={Line} value="Line">
+              Line Chart
+            </option>
+            <option value="Bar">Bar Chart</option>
+            <option value="Pie">Pie Chart</option>
+          </select>
+     
+        {chosenChartType}
+      </div>
+    );
+
 }
