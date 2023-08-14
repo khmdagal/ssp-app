@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
+import "./ProfileStyle.css"
 
 import Charts from "./Charts";
 import UserOverallProgress from "./UserOverallProgress";
@@ -67,7 +68,7 @@ console.log(progressData);
       <p>
         <FaUserAlt /> {userFullName}
       </p>
-      <div>
+      <div className="TableAndCharDiv">
         <UserOverallProgress
           userFullName={userFullName}
           progressData={progressData}

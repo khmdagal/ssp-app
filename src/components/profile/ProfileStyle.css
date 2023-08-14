@@ -1,0 +1,11 @@
+.TableAndCharDiv{
+    display: flex;
+    padding: 10px;
+    justify-content: space-evenly;
+}
+.dataTable{
+    width: 40%;
+}
+.chart{
+    width: 40%;
+}

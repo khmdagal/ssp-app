@@ -1,5 +1,5 @@
 import Table from "react-bootstrap/Table";
-
+import "./ProfileStyle.css";
 
 export default function UserOverallProgress({ progressData, userFullName }) {
 
@@ -7,8 +7,8 @@ export default function UserOverallProgress({ progressData, userFullName }) {
  
 
   return (
-    <div style={{ display: "flex" }}>
-      <Table striped bordered hover size="ms">
+   
+      <Table className="dataTable" striped bordered hover>
         <thead>
           <tr>
             <th colSpan={2}>{`${userFullName} Sessions Record Progress`}</th>
@@ -27,8 +27,5 @@ export default function UserOverallProgress({ progressData, userFullName }) {
           ))}
         </tbody>
       </Table>
-      <div style={{ width: 700 }}>
-      </div>
-    </div>
   );
 }
