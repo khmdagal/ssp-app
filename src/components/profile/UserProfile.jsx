@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { FaUserAlt } from "react-icons/fa";
 import "./ProfileStyle.css"
 
 import Charts from "./Charts";

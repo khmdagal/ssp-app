@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { FaUserAlt } from "react-icons/fa";
 import jwt from "jwt-decode";
 import UserProfile from "../profile/UserProfile";
-import Words from "../words-and-practice/GetWords";
 import Logout from "../authentication-Forms/Logout";
 
 
