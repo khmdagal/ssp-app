@@ -73,7 +73,23 @@ function SignUpForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (signUpValidations(firstname, lastname, username, password)) {
+    if (!signUpValidations(firstname, lastname, username, password)) {
+      setFirstName("");
+      setLastName("");
+      setUserName("");
+      setPassword("");
+      setEmail("");
+
+     alert(`
+      1) First and Last names should be more 3 characters.
+      2) Username should be more then 6 characters.
+      3) Password should contain at :
+                  * At least one number.
+                  * At least one capital letter. 
+                  * At least one small letter.
+                  * At least one special character.
+      `);
+    } else {
       await loginUser({
         firstname,
         lastname,
