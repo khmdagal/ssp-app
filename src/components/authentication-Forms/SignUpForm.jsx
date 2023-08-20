@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { signUpValidations } from "../../helper/Validation";
 
 function SignUpForm() {
   const navigate = useNavigate();
@@ -29,15 +30,58 @@ function SignUpForm() {
 
   console.log(firstname, lastname, username, password, email);
 
+  // const handleFirstName = (e) => {
+  //   const value = e.target.value;
+  //   if (value === "" || value.length < 3) {
+  //     alert("First name should more then 3 digit");
+  //     // return (
+  //     //   <p style={{ color: "#FF0000" }}>First name should more then 3 digit</p>
+  //     // );
+  //   } else {
+  //     setFirstName(value);
+  //   }
+  // };
+
+  // success and error messages
+
+  // const successMessage = () => {
+  //   return (
+  //     <div
+  //       className="success"
+  //       style={{
+  //         display: submitted ? "" : "none",
+  //       }}
+  //     >
+  //       <h1>User {name} successfully registered!!</h1>
+  //     </div>
+  //   );
+  // };
+
+  // // Showing error message if error is true
+  // const errorMessage = () => {
+  //   return (
+  //     <div
+  //       className="error"
+  //       style={{
+  //         display: error ? "" : "none",
+  //       }}
+  //     >
+  //       <h1>Please enter all the fields</h1>
+  //     </div>
+  //   );
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await loginUser({
-      firstname,
-      lastname,
-      username,
-      password,
-      email,
-    });
+    if (signUpValidations(firstname, lastname, username, password)) {
+      await loginUser({
+        firstname,
+        lastname,
+        username,
+        password,
+        email,
+      });
+    }
   };
 
   return (
