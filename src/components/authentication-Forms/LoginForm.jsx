@@ -66,6 +66,40 @@ export default function Login() {
           )}
         </Form.Group>
 
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <label className="labels">Password</label>
+          <Form.Control
+            type="text"
+            name="password"
+            {...register("password", {
+              required: true,
+              validate: {
+                checkLength: (value) => value.length > 7,
+                matchPattern: (value) =>
+                  /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/.test(
+                    value
+                  ),
+              },
+            })}
+          />
+          {errors.password?.type === "required" && (
+            <p className="errorMsg">Password is required.</p>
+          )}
+          {errors.password?.type === "checkLength" && (
+            <p className="errorMsg">
+              Password should be at-least 7 characters.
+            </p>
+          )}
+          {errors.password?.type === "matchPattern" && (
+            <ul className="errorMsg">
+              <li>Password must be at least 7 characters long</li>
+              <li>At least one number 0-9</li>
+              <li>At least one Uppercase Letter A-Z</li>
+              <li>At lease one lowercase letter a-z</li>
+              <li>At lease one special characters !@#$* </li>
+            </ul>
+          )}
+        </Form.Group>
         <div>
           <Button className="btn-signIn" type="submit" data-cy="submitButton">
             Sign in
