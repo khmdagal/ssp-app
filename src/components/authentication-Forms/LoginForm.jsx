@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 import "./SiginAndUp.css";
-import SingInSpinner from "../spinners/SingInSpinner";
+//import SingInSpinner from "../spinners/SingInSpinner";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -38,15 +40,32 @@ export default function Login() {
     }
   }
 
+  const onSubmit = (data) => {
+    console.log(data);
+    //fetchLoginDetails(data)
+  };
 
-  const onSubmit = data => {
-    console.log(data)
-  //fetchLoginDetails(data)
-  }
-  
+  return (
+    <div className="login-wrapper">
+      <Form className="signIn-form" onSubmit={handleSubmit(onSubmit)}>
+        <div>
+          <label>Username</label>
+          <input />
+        </div>
 
+        <div>
+          <label>Password</label>
+          <input />
+        </div>
 
-  
+        <div>
+          <Button className="btn-signIn" type="submit" data-cy="submitButton">
+            Sign in
+          </Button>
+        </div>
+      </Form>
+    </div>
+  );
 }
 
 /*
