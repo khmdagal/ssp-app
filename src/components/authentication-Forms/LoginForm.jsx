@@ -7,10 +7,7 @@ import SingInSpinner from "../spinners/SingInSpinner";
 export default function Login() { 
   const navigate = useNavigate();
   const [loader, setLoader]= useState(false)
-  const [loginData, setLoginData] = useState({
-    username: "",
-    password: ""
-  });
+  
 
   async function loginUser(credentials) {
     const response = await fetch("http://localhost:8080/login", {
@@ -38,59 +35,10 @@ export default function Login() {
     }
   }
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setLoginData((previousEntries) => ({
-      ...previousEntries,
-      [name]: value
-    }));
-}
+  
 
   
-  const handleSubmit = e => {
-    e.preventDefault();
-    setTimeout(() => {
-     loginUser(loginData);
-    }, 5000);
-    
-    console.log(loginData)
-  }
-
   
-    return (
-      <div>
-        {loader ? <SingInSpinner /> : null}
-        <form onSubmit={handleSubmit}>
-          <div className="form-control">
-            <label>User Name</label>
-            <input
-              type="text"
-              name="username"
-              value={loginData.username}
-              onChange={handleInputChange}
-              placeholder="Enter your username"
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={loginData.password}
-              onChange={handleInputChange}
-              placeholder="Enter your password"
-              required
-            />
-          </div>
-          <div className="form-control">
-            <label></label>
-            <button type="submit">Login</button>
-          </div>
-        </form>
-      </div>
-    );
-
 }
 
 
