@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import "./SiginAndUp.css";
 import SingInSpinner from "../spinners/SingInSpinner";
 
-
-export default function Login() { 
+export default function Login() {
   const navigate = useNavigate();
-  const [loader, setLoader]= useState(false)
-  
+  const [loader, setLoader] = useState(false);
 
-  async function loginUser(credentials) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  async function fetchLoginDetails(credentials) {
     const response = await fetch("http://localhost:8080/login", {
       method: "POST",
       headers: {
@@ -20,13 +25,11 @@ export default function Login() {
 
     if (!response.ok) {
       // console.log("response status is not okay! investigate");
-      console.log("===>>>",loader)
-      setLoader(true)
-     setTimeout(() => {
+      console.log("===>>>", loader);
+      setLoader(true);
+      setTimeout(() => {
         alert("Incorrect Login details");
-      }, 5000)
-      
-     
+      }, 5000);
     } else {
       const data = await response.json();
       localStorage.setItem("token", data.token);
@@ -35,12 +38,16 @@ export default function Login() {
     }
   }
 
+
+  const onSubmit = data => {
+    console.log(data)
+  //fetchLoginDetails(data)
+  }
   
 
-  
+
   
 }
-
 
 /*
 
