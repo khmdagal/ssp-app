@@ -47,32 +47,31 @@ export default function Login() {
 
   return (
     <div className="login-wrapper">
-      <form className="signIn-form" onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-control">
-          <label>Username</label>
-          <input
+      <Form className="signIn-form" onSubmit={handleSubmit(onSubmit)}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <label className="labels">Username</label>
+          <Form.Control
             type="text"
             name="username"
             {...register("username", {
               required: "Username is required",
               minLength: {
                 value: 6,
-                message:"Username must be at least 6 character long"
-              }
+                message: "Username must be at least 6 character long",
+              },
             })}
           />
-          {errors.username && (<p>{errors.username.message} </p>)}
-          {errors.username?.type === "maxLength" && (
-            <p>username must be at least 6 character long</p>
+          {errors.username && (
+            <p className="errorMsg">{errors.username.message} </p>
           )}
-        </div>
+        </Form.Group>
 
-        <div className="form-control">
+        <div>
           <Button className="btn-signIn" type="submit" data-cy="submitButton">
             Sign in
           </Button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 }

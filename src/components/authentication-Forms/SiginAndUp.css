@@ -7,20 +7,26 @@
 body {
   background: url("https://doc-08-2c-docs.googleusercontent.com/docs/securesc/68c90smiglihng9534mvqmq1946dmis5/fo0picsp1nhiucmc0l25s29respgpr4j/1631524275000/03522360960922298374/03522360960922298374/1Sx0jhdpEpnNIydS4rnN4kHSJtU1EyWka?e=view&authuser=0&nonce=gcrocepgbb17m&user=03522360960922298374&hash=tfhgbs86ka6divo3llbvp93mg4csvb38")
     no-repeat center/ cover;
-    
 }
 
- h1 {
-    font-size: 25px;
-    padding: 10px;
-  }
-
+h1 {
+  font-size: 25px;
+  padding: 10px;
+}
 
 .d-grid {
-    display: grid!important;
-    align-content: center;
-    justify-items: center;
-    width: fit-content;
+  display: grid !important;
+  align-content: center;
+  justify-items: center;
+  width: fit-content;
+}
+.errorMsg {
+  max-width: 350px;
+  color: #f21e08;
+  padding: 2px 0;
+  margin-top: 2px;
+  font-size: 14px;
+  font-weight: bolder;
 }
 /* ================== Mobile view ========================== */
 /* ---- signIn form ---- */
@@ -55,18 +61,14 @@ body {
   box-shadow: 5px 20px 50px #000;
 }
 
-
-   /* -- Sign in form button --- */
-  .btn-signIn{
-    width: 200px;
-    
-  }
-  /* -- Sign Up form button --- */
-  .btn-signUp{
+/* -- Sign in form button --- */
+.btn-signIn {
   width: 200px;
-  }
-
-
+}
+/* -- Sign Up form button --- */
+.btn-signUp {
+  width: 200px;
+}
 
 /* ================== Tablet view ========================== */
 
@@ -95,7 +97,6 @@ body {
   .signIn-form {
     width: 600px;
     height: 500px;
-
   }
 
   /* ---- SignUp form ----- */
@@ -107,14 +108,13 @@ body {
     margin: 10px 0px 10px 0px;
   }
 
-/* -- Sign in form button --- */
-   .btn-signIn{
+  /* -- Sign in form button --- */
+  .btn-signIn {
     width: 260px;
-    
   }
   /* -- Sign Up form button --- */
-  .btn-signUp{
-  width: 260px;
+  .btn-signUp {
+    width: 260px;
   }
 }
 
@@ -156,20 +156,18 @@ body {
     margin: 10px 0px 10px 0px;
   }
 
-    /* -- Sign in form button --- */
-   .btn-signIn{
+  /* -- Sign in form button --- */
+  .btn-signIn {
     width: 300px;
-    
   }
   /* -- Sign Up form button --- */
-  .btn-signUp{
-  width: 300px;
+  .btn-signUp {
+    width: 300px;
   }
-
 }
 
 /* ================== large screens ========================== */
-@media screen and (min-width: 1921px)  {
+@media screen and (min-width: 1921px) {
   h1 {
     font-size: 80px;
     padding: 10px;
@@ -206,17 +204,14 @@ body {
     margin: 20px 0px 30px 0px;
   }
 
-   /* -- Sign in form button --- */
-   .btn-signIn{
+  /* -- Sign in form button --- */
+  .btn-signIn {
     width: 350px;
     font-size: 40px;
-    
   }
   /* -- Sign Up form button --- */
-  .btn-signUp{
-  width: 350px;
-  font-size: 40px;
+  .btn-signUp {
+    width: 350px;
+    font-size: 40px;
   }
-
 }
-
