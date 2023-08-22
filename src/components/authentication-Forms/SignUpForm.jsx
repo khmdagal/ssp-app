@@ -2,66 +2,104 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-
-export default function SignUpForm() { 
+export default function SignUpForm() {
   const navigate = useNavigate();
-  
 
-async function loginUser(credentials) {
-  const response = await fetch("http://localhost:8080/signup", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(credentials),
-  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-  if (response.ok) {
-    navigate("/login");
-  } else {
-    console.log("response status is not okay! investigate");
+  async function loginUser(credentials) {
+    const response = await fetch("http://localhost:8080/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    if (response.ok) {
+      navigate("/login");
+    } else {
+      console.log("response status is not okay! investigate");
+    }
   }
-}
-
-
 
   return (
     <div className="login-wrapper">
-      <Form className="signUp-form" >
+      <Form className="signUp-form" onSubmit={handleSubmit(loginUser)}>
         <h1>Registration Form</h1>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="labels">First Name</Form.Label>
           <Form.Control
-           
+            type="text"
+            name="firstname"
+            {...register("firstname", {
+              required: "Please enter your first name😀",
+            })}
           />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="labels">Last Name</Form.Label>
           <Form.Control
-           
+            type="text"
+            name="lastname"
+            {...register("lastname", {
+              required: "Please enter your last name😀",
+            })}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="labels">Username</Form.Label>
           <Form.Control
-            
+            type="text"
+            name="username"
+            {...register("username", {
+              required: "username is required",
+              minLength: {
+                value: 6,
+                message: "Username must be at least 6 character long",
+              },
+            })}
           />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="labels">Password</Form.Label>
           <Form.Control
-            
+            type="password"
+            name="password"
+            {...register("password", {
+              required: "Password is required",
+              validate: {
+                checkLength: (passwordValue) => passwordValue.length >= 7,
+                matchPattern: (passwordPatternValue) =>
+                  /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)(?=.*[!@#$*])/.test(
+                    passwordPatternValue
+                  ),
+              },
+            })}
           />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="labels">Email</Form.Label>
           <Form.Control
-           
+            type="email"
+            name="email"
+            {...register("email", {
+              required: "Email is required",
+              pattern: {
+                value: /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/,
+                message: "Please input valid email",
+              },
+            })}
           />
         </Form.Group>
 
