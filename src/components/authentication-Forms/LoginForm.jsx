@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./SiginAndUp.css";
-//import SingInSpinner from "../spinners/SingInSpinner";
+import SingInSpinner from "../spinners/SingInSpinner";
 
 export default function Login() {
   const navigate = useNavigate();
   const [loader, setLoader] = useState(false);
+  const [responseErrorMsg, setResponseErrorMsg] = useState("");
 
   const {
     register,
@@ -27,11 +28,8 @@ export default function Login() {
 
     if (!response.ok) {
       // console.log("response status is not okay! investigate");
-      console.log("===>>>", loader);
-      setLoader(true);
-      setTimeout(() => {
-        alert("Incorrect Login details");
-      }, 5000);
+      setResponseErrorMsg(response.json());
+     
     } else {
       const data = await response.json();
       localStorage.setItem("token", data.token);
@@ -42,11 +40,16 @@ export default function Login() {
 
   const onSubmit = (data) => {
     console.log(data);
-    //fetchLoginDetails(data)
+    setLoader(true);
+    setTimeout(() => {
+      //fetchLoginDetails(data)
+    },5000)
+    
   };
 
   return (
     <div className="login-wrapper">
+      {loader && <SingInSpinner />}
       <Form className="signIn-form" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <label className="labels">Username</label>
@@ -87,7 +90,7 @@ export default function Login() {
           )}
           {errors.password?.type === "checkLength" && (
             <p className="errorMsg">
-              Password should be at-least 7 characters.
+              npm Password should be at-least 7 characters.
             </p>
           )}
           {errors.password?.type === "matchPattern" && (
@@ -101,6 +104,7 @@ export default function Login() {
           )}
         </Form.Group>
         <div>
+          {responseErrorMsg && responseErrorMsg}
           <Button className="btn-signIn" type="submit" data-cy="submitButton">
             Sign in
           </Button>
