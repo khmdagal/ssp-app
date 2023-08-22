@@ -4,7 +4,7 @@ import { FaUserAlt } from "react-icons/fa";
 import jwt from "jwt-decode";
 import UserProfile from "../profile/UserProfile";
 import Logout from "../authentication-Forms/Logout";
-
+import GetWords from "../words-and-practice/GetWords";
 
 export default function Dashboard() {
   const token = localStorage.getItem("token");
@@ -15,7 +15,6 @@ export default function Dashboard() {
   const [userId, setUserId] = useState("");
 
   useEffect(() => {
-
     if (!!user) {
       setUserFirstName(user.firstname);
       setUserLastName(user.lastname);
@@ -35,6 +34,7 @@ export default function Dashboard() {
         <FaUserAlt /> {userFullname}
       </p>
       <UserProfile user={user} />
+      <GetWords user={user} />
     </div>
   );
 }
