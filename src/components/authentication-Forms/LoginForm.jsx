@@ -19,7 +19,7 @@ export default function Login() {
   } = useForm();
 
   async function fetchLoginDetails(credentials) {
-    const response = await fetch("http://localhost:8080/login", {
+    const response = await fetch("https://spelling-server.glitch.me/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

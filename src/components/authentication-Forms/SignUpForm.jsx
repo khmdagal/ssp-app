@@ -15,7 +15,7 @@ export default function SignUpForm() {
   } = useForm();
 
   async function loginUser(credentials) {
-    const response = await fetch("http://localhost:8080/signup", {
+    const response = await fetch("https://spelling-server.glitch.me/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

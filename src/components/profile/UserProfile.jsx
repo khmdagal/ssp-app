@@ -15,7 +15,7 @@ export default function UserProfile({ user }) {
     try {
       // Perform asynchronous operations, such as fetching data
       const response = await fetch(
-        `http://localhost:8080/overall_progress_data/${user_id}`
+        `https://spelling-server.glitch.me/overall_progress_data/${user_id}`
       );
 
       if (!response.ok) {
