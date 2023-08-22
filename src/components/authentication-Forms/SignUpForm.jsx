@@ -2,6 +2,83 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
+
+
+export default function SignUpForm() { 
+  const navigate = useNavigate();
+  
+
+async function loginUser(credentials) {
+  const response = await fetch("http://localhost:8080/signup", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
+
+  if (response.ok) {
+    navigate("/login");
+  } else {
+    console.log("response status is not okay! investigate");
+  }
+}
+
+
+
+  return (
+    <div className="login-wrapper">
+      <Form className="signUp-form" >
+        <h1>Registration Form</h1>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="labels">First Name</Form.Label>
+          <Form.Control
+           
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="labels">Last Name</Form.Label>
+          <Form.Control
+           
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="labels">Username</Form.Label>
+          <Form.Control
+            
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="labels">Password</Form.Label>
+          <Form.Control
+            
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label className="labels">Email</Form.Label>
+          <Form.Control
+           
+          />
+        </Form.Group>
+
+        <Button className="btn-signUp" type="submit">
+          Sign up
+        </Button>
+      </Form>
+    </div>
+  );
+}
+
+/*
+
+import React, { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 //import { signUpValidations } from "../../helper/Validation";
 
 function SignUpForm() {
@@ -150,3 +227,6 @@ function SignUpForm() {
 }
 
 export default SignUpForm;
+
+
+*/
