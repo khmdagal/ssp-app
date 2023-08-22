@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import "./SiginAndUp.css";
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -40,9 +41,12 @@ export default function SignUpForm() {
             type="text"
             name="firstname"
             {...register("firstname", {
-              required: "Please enter your first name😀",
+              required: true,
             })}
           />
+          {errors.firstname && (
+            <p className="errorMsg">First name is required</p>
+          )}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -54,6 +58,7 @@ export default function SignUpForm() {
               required: "Please enter your last name😀",
             })}
           />
+          {errors.lastname && <p className="errorMsg">Last name is required</p>}
         </Form.Group>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label className="labels">Username</Form.Label>
@@ -61,13 +66,19 @@ export default function SignUpForm() {
             type="text"
             name="username"
             {...register("username", {
-              required: "username is required",
+              required: true,
               minLength: {
                 value: 6,
                 message: "Username must be at least 6 character long",
               },
             })}
           />
+          {errors.username?.type === "required" && (
+            <p className="errorMsg">Username is required</p>
+          )}
+          {errors.username?.type === "minLength" && (
+            <p className="errorMsg">{errors.username.message}</p>
+          )}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -86,6 +97,23 @@ export default function SignUpForm() {
               },
             })}
           />
+          {errors.password?.type === "required" && (
+            <p className="errorMsg">Password is required.</p>
+          )}
+          {errors.password?.type === "checkLength" && (
+            <p className="errorMsg">
+              npm Password should be at-least 7 characters.
+            </p>
+          )}
+          {errors.password?.type === "matchPattern" && (
+            <ul className="errorMsg">
+              <li>Password must be at least 7 characters long</li>
+              <li>At least one number 0-9</li>
+              <li>At least one Uppercase Letter A-Z</li>
+              <li>At lease one lowercase letter a-z</li>
+              <li>At lease one special characters !@#$* </li>
+            </ul>
+          )}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -101,6 +129,7 @@ export default function SignUpForm() {
               },
             })}
           />
+          {errors.email && <p className="errorMsg">{errors.email.message}</p>}
         </Form.Group>
 
         <Button className="btn-signUp" type="submit">
