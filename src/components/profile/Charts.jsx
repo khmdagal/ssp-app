@@ -44,6 +44,7 @@ export default function Charts({ chartData }) {
       </select>
 
       {chosenChartType}
+      {ChartJS}
     </div>
   );
 }
