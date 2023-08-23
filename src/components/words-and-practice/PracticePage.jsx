@@ -57,13 +57,16 @@ export default function PracticePage({
   };
 
   async function sessionRecord(sessionData) {
-    const response = await fetch("http://localhost:8080/session-Record", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(sessionData),
-    });
+    const response = await fetch(
+      "https://spelling-server.glitch.me/session-Record",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(sessionData),
+      }
+    );
 
     console.log(response);
 
