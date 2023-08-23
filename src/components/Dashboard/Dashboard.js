@@ -12,13 +12,13 @@ export default function Dashboard() {
 
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
-  const [userId, setUserId] = useState("");
+ 
+  
 
   useEffect(() => {
     if (!!user) {
       setUserFirstName(user.firstname);
       setUserLastName(user.lastname);
-      setUserId(user.id);
     }
   }, [user]);
 
