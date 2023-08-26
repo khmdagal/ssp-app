@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
-import { Charts as ChartJS } from "chart.js/auto";
+import "chart.js/auto";
 import "./ProfileStyle.css";
 
 export default function Charts({ chartData }) {
