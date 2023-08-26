@@ -12,6 +12,7 @@ export default function Dashboard() {
 
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
+  const [updateUserRecord, setUpdateUserRecord] = useState()
  
   
 
@@ -33,8 +34,8 @@ export default function Dashboard() {
         {" "}
         <FaUserAlt /> {userFullname}
       </p>
-      <UserProfile user={user} />
-      <GetWords user={user} />
+      <UserProfile updateUserRecord={updateUserRecord} user={user} />
+      <GetWords setUpdateUserRecord={setUpdateUserRecord} user={user} />
     </div>
   );
 }

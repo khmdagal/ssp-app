@@ -2,6 +2,7 @@
 import React, { useState, useRef } from "react";
 
 export default function PracticePage({
+  setUpdateUserRecord,
   setDisplayWord,
   arrayOfSelectedWords,
   data,
@@ -71,10 +72,30 @@ export default function PracticePage({
     console.log(response);
 
     if (response.ok) {
-      alert("session Data is recorded");
+      getUserOverallProgressData(userId);
+      //alert("session Data is recorded");
     } else {
       alert("something is wrong have a look");
       console.log("data not recorded");
+    }
+  }
+
+  async function getUserOverallProgressData(user_id) {
+    try {
+      // Perform asynchronous operations, such as fetching data
+      const response = await fetch(
+        `https://spelling-server.glitch.me/overall_progress_data/${user_id}`
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch progress data");
+      }
+
+      const overallProgressData = await response.json();
+      setUpdateUserRecord(overallProgressData);
+    } catch (error) {
+      console.error(error);
+      // Handle the error here if needed
     }
   }
 

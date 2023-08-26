@@ -4,7 +4,7 @@ import PracticePage from "./PracticePage";
 //import { FaUserAlt } from "react-icons/fa";
 import "./getwords.css";
 
-function GetWords({ user }) {
+function GetWords({ user, setUpdateUserRecord }) {
   const [data, setData] = useState([]);
   const [clickedWords, setClickedWords] = useState("");
   const [userId, setUserId] = useState("");
@@ -25,7 +25,7 @@ function GetWords({ user }) {
 
     fetchWords();
     if (!!user) {
-     
+
       setUserId(user.id);
     }
 
@@ -36,7 +36,7 @@ function GetWords({ user }) {
 
   return (
     <>
-    
+
       <p>
         Choose the range of words you would like practice and then click the{" "}
         <strong>
@@ -81,6 +81,7 @@ function GetWords({ user }) {
         <p>Good luck for the practice</p>
       )}
       <PracticePage
+        setUpdateUserRecord={setUpdateUserRecord}
         setDisplayWord={setDisplayWord}
         arrayOfSelectedWords={arrayOfSelectedWords}
         data={data}

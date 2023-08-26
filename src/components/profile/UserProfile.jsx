@@ -1,13 +1,12 @@
 import { useState, useEffect } from "react";
-import "./ProfileStyle.css"
+import "./ProfileStyle.css";
 
 import Charts from "./Charts";
 import UserOverallProgress from "./UserOverallProgress";
 
-export default function UserProfile({ user }) {
+export default function UserProfile({ user, updateUserRecord }) {
   const [userFirstName, setUserFirstName] = useState("");
   const [userLastName, setUserLastName] = useState("");
-  const [userId, setUserId] = useState("");
   const [progressData, setProgressData] = useState([]);
   const [chartData, setChartData] = useState({});
 
@@ -29,42 +28,38 @@ export default function UserProfile({ user }) {
       // Handle the error here if needed
     }
   };
-console.log(progressData);
+
   useEffect(() => {
     if (!!user) {
       setUserFirstName(user.firstname);
       setUserLastName(user.lastname);
-      setUserId(user.id);
     }
     getUserOverallProgressData(user.id);
-  }, [user]); // adding here sessionData variable will help the practice record to be updated with out refreshing the page
+  }, [user]);
 
   useEffect(() => {
+    setChartData({
+      labels: progressData.map((data) => data.session_id),
+      datasets: [
+        {
+          label: "Sessions",
+          data: progressData.map((data) => data.session_accuracy_percentage),
+        },
+      ],
+    });
 
-      setChartData({
-        labels: progressData.map((data) => data.session_id),
-        datasets: [
-          {
-            label: "Sessions",
-            data: progressData.map((data) => data.session_accuracy_percentage),
-          },
-        ],
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [userId,progressData]);
+  }, [updateUserRecord, progressData]);
 
   const userFullName = `${userFirstName} ${userLastName}`;
-  console.log(userFullName)
 
- if (!progressData) {
-   return <p>Loading...</p>;
- } else if (progressData.length === 0) {
-   return <p>No progress data available.</p>;
- }
+  if (!progressData) {
+    return <p>Loading...</p>;
+  } else if (progressData.length === 0) {
+    return <p>No progress data available.</p>;
+  }
 
   return (
     <div>
-     
       <div className="TableAndCharDiv">
         <UserOverallProgress
           userFullName={userFullName}
