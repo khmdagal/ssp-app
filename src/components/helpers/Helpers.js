@@ -26,3 +26,11 @@ export function validatePassword(password) {
   // if password is valid return nothing
   return "";
 }
+
+//Remove white space before sending data to the server
+export function trimWhiteSpaces(obj) {
+  return Object.keys(obj).reduce((acc, curr) => {
+    acc[curr] = obj[curr].trim();
+    return acc;
+  }, {});
+}
