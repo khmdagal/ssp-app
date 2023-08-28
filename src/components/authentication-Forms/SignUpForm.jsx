@@ -3,6 +3,8 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./SiginAndUp.css";
+import { trimWhiteSpaces } from "../helpers/Helpers";
+
 
 export default function SignUpForm() {
   const navigate = useNavigate();
@@ -29,9 +31,16 @@ export default function SignUpForm() {
     }
   }
 
+const onSubmit = (data) => {
+
+  const dataWithNoWhiteSpaces = trimWhiteSpaces(data);
+   
+    loginUser(dataWithNoWhiteSpaces);
+};
+
   return (
     <div className="login-wrapper">
-      <Form className="signUp-form" onSubmit={handleSubmit(loginUser)}>
+      <Form className="signUp-form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Registration Form</h1>
 
         <Form.Group className="mb-3" controlId="formBasicEmail">

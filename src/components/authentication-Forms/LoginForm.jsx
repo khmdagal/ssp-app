@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "./SiginAndUp.css";
 import SingInSpinner from "../spinners/SingInSpinner";
+import { trimWhiteSpaces } from "../helpers/Helpers";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -45,10 +46,12 @@ export default function Login() {
   }
 
   const onSubmit = (data) => {
-    console.log(data);
     setLoader(true);
+
+    const dataWithNoWhiteSpaces = trimWhiteSpaces(data);
+
     setTimeout(() => {
-      fetchLoginDetails(data);
+      fetchLoginDetails(dataWithNoWhiteSpaces);
     }, 5000);
   };
 
@@ -63,6 +66,7 @@ export default function Login() {
             name="username"
             {...register("username", {
               required: "Username is required",
+            
               minLength: {
                 value: 6,
                 message: "Username must be at least 6 character long",
