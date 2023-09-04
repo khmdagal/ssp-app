@@ -36,7 +36,6 @@ function GetWords({ user, setUpdateUserRecord }) {
 
   return (
     <>
-
       <p>
         Choose the range of words you would like practice and then click the{" "}
         <strong>
@@ -67,10 +66,10 @@ function GetWords({ user, setUpdateUserRecord }) {
                     }}
                     id={word.word_id}
                     type="checkbox"
-                    value={word.word}
+                    value={word.year3and4words}
                   />
                   <label htmlFor={word.word_id}>
-                    {word.word_id}: {word.word}
+                    {word.word_id}: {word.year3and4words}
                   </label>
                 </span>
               </div>
