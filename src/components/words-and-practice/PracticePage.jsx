@@ -224,9 +224,9 @@ export default function PracticePage({
         </label>
       </div>
 
-      <p>Correct Answers {correctWordsList.join(",")}</p>
+      {/* <p>Well done so far {correctWordsList.length}</p>
 
-      <p>Wrong Answers {wrongWordsList.join(",")}</p>
+      <p>Wrong Answers {wrongWordsList.length}</p> */}
 
       <button onClick={submitSessionRecordHandle}>Save Session Record</button>
       <button
