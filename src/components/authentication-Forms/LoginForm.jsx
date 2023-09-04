@@ -82,7 +82,7 @@ export default function Login() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <label className="labels">Password</label>
           <Form.Control
-            type="text"
+            type="password"
             name="password"
             {...register("password", {
               required: true,
