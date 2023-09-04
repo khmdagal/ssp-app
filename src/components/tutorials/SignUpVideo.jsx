@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player";
 import Button from "react-bootstrap/Button";
-import Video from "../tutorials/SignUpExp.mp4";
 const SignUpVideo = () => {
   const [display, setDisplay] = useState("none");
+
+  const Video = "https://www.youtube.com/watch?v=KO_sRHP-omo";
 
   const onClick = () => {
     if (display === "none") {
