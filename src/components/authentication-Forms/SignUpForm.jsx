@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./SiginAndUp.css";
 import { trimWhiteSpaces } from "../helpers/Helpers";
+import SignUpVideo from "../tutorials/SignUpVideo";
 
 
 export default function SignUpForm() {
@@ -40,6 +41,7 @@ const onSubmit = (data) => {
 
   return (
     <div className="login-wrapper">
+      <SignUpVideo />
       <Form className="signUp-form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Registration Form</h1>
 

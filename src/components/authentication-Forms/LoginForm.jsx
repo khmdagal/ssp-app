@@ -6,6 +6,7 @@ import Button from "react-bootstrap/Button";
 import "./SiginAndUp.css";
 import SingInSpinner from "../spinners/SingInSpinner";
 import { trimWhiteSpaces } from "../helpers/Helpers";
+import SignInVideo from "../tutorials/SignInVideo";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ export default function Login() {
   return (
     <div className="login-wrapper">
       {loader && <SingInSpinner />}
+      <SignInVideo />
       <Form className="signIn-form" onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <label className="labels">Username</label>
