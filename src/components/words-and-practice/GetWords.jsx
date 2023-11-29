@@ -14,7 +14,7 @@ function GetWords({ user, setUpdateUserRecord, selectedYearsWords }) {
     async function fetchWords() {
       try {
         const response = await fetch(
-          `http://localhost:8080/words/${selectedYearsWords}`
+          `https://spelling-server.glitch.me/words/${selectedYearsWords}`
         );
         const words = await response.json();
         setData(words);
@@ -29,20 +29,6 @@ function GetWords({ user, setUpdateUserRecord, selectedYearsWords }) {
   }, [selectedYearsWords, user]);
 
   const arrayOfSelectedWords = [...clickedWords]; //.join(", ");
-
-
-  let words;
-  switch (selectedYearsWords) {
-    case "year3and4words":
-      words = "year3and4words";
-      break;
-    case "year5and6words":
-      words = "year5and6words";
-      break;
-
-    default:
-      break;
-  }
 
   return (
     <>
