@@ -228,8 +228,11 @@ export default function PracticePage({
 
       <p>Wrong Answers {wrongWordsList.length}</p> */}
 
-      <button onClick={submitSessionRecordHandle}>Save Session Record</button>
+      <button className="btn btn-secondary" onClick={submitSessionRecordHandle}>
+        Save Session Record
+      </button>
       <button
+        className="btn btn-primary"
         ref={getNewWordButton}
         name="getNewWordbutton"
         id="getNewWordbutton"
