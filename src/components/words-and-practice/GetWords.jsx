@@ -4,7 +4,7 @@ import PracticePage from "./PracticePage";
 //import { FaUserAlt } from "react-icons/fa";
 import "./getwords.css";
 
-function GetWords({ user, setUpdateUserRecord }) {
+function GetWords({ user, setUpdateUserRecord, selectedYearsWords }) {
   const [data, setData] = useState([]);
   const [clickedWords, setClickedWords] = useState("");
   const [userId, setUserId] = useState("");
@@ -12,7 +12,9 @@ function GetWords({ user, setUpdateUserRecord }) {
 
   async function fetchWords() {
     try {
-      const response = await fetch("https://spelling-server.glitch.me/words");
+      const response = await fetch(
+        `https://spelling-server.glitch.me/words/${selectedYearsWords}`
+      );
       const words = await response.json();
       setData(words);
     } catch (err) {
@@ -33,6 +35,21 @@ function GetWords({ user, setUpdateUserRecord }) {
 
 
   const arrayOfSelectedWords = [...clickedWords]; //.join(", ");
+
+console.log(data.map(word => word))
+
+  let words;
+  switch (selectedYearsWords) {
+    case "year3and4words":
+      words = "year3and4words";
+      break;
+    case "year5and6words":
+      words = "year5and6words";
+      break;
+
+    default:
+      break;
+  }
 
   return (
     <>
@@ -66,10 +83,10 @@ function GetWords({ user, setUpdateUserRecord }) {
                     }}
                     id={word.word_id}
                     type="checkbox"
-                    value={word.year3and4words}
+                    value={word[selectedYearsWords]}
                   />
                   <label htmlFor={word.word_id}>
-                    {word.word_id}: {word.year3and4words}
+                    {word.word_id}: {word[selectedYearsWords]}
                   </label>
                 </span>
               </div>
