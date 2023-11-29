@@ -1,0 +1,16 @@
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  
+  width: fit-content;
+  border-radius: 5px;
+  border: solid black 2px;
+  padding: 5px;
+  margin: 3px;
+}
+
+.dropdown label {
+  background-color: rgb(68, 4, 92);
+  color: white;
+  text-align: center;
+}
