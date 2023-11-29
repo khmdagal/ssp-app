@@ -10,33 +10,26 @@ function GetWords({ user, setUpdateUserRecord, selectedYearsWords }) {
   const [userId, setUserId] = useState("");
   const [displayWord, setDisplayWord] = useState(true);
 
-  async function fetchWords() {
-    try {
-      const response = await fetch(
-        `https://spelling-server.glitch.me/words/${selectedYearsWords}`
-      );
-      const words = await response.json();
-      setData(words);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
-
   useEffect(() => {
-
+    async function fetchWords() {
+      try {
+        const response = await fetch(
+          `http://localhost:8080/words/${selectedYearsWords}`
+        );
+        const words = await response.json();
+        setData(words);
+      } catch (err) {
+        console.error(err);
+      }
+    }
     fetchWords();
     if (!!user) {
-
       setUserId(user.id);
     }
-
-  }, [user]);
-
+  }, [selectedYearsWords, user]);
 
   const arrayOfSelectedWords = [...clickedWords]; //.join(", ");
 
-console.log(data.map(word => word))
 
   let words;
   switch (selectedYearsWords) {
