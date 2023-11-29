@@ -47,7 +47,6 @@ export default function Dashboard() {
       <div  class="dropdown">
         <label for="floatingSelect">Select spelling words for </label>
         <select
-          // class="btn btn-secondary"
           aria-expanded="false"
           id="wordsOption"
           name="wordsOption"
@@ -57,18 +56,6 @@ export default function Dashboard() {
           <option value="year5and6words">Year 5 & 6 spelling words</option>
         </select>
       </div>
-
-      {/* <div>
-        <label htmlFor="wordsOption">Select the year</label>
-        <select
-          name="wordsOption"
-          id="wordsOption"
-          onChange={handleSelectedYearWords}
-        >
-          <option value="year3and4words">year 3 & 4 words</option>
-          <option value="year5and6words">year 5 & 6 words</option>
-        </select>
-      </div> */}
 
       <UserProfile updateUserRecord={updateUserRecord} user={user} />
       <GetWords
