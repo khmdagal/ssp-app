@@ -62,11 +62,12 @@ export default function Login() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <label className="labels">Username</label>
           <Form.Control
+            data-cy="userNameInputField"
             type="text"
             name="username"
             {...register("username", {
               required: "Username is required",
-            
+
               minLength: {
                 value: 6,
                 message: "Username must be at least 6 character long",
@@ -82,6 +83,7 @@ export default function Login() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <label className="labels">Password</label>
           <Form.Control
+            data-cy="passwordInputField"
             type="password"
             name="password"
             {...register("password", {
